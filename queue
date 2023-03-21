@@ -1,0 +1,61 @@
+#include<stdio.h>
+#define MAX 5
+
+int que[MAX];
+int rear=-1;
+int front=0;
+
+void enque();
+void deque();
+void display();
+
+void main(){
+    int ch;
+    while(1){
+    printf("1.enter\n2.delete\n3.display\n");
+    printf("enter choice\n");
+    scanf("%d",&ch);
+    switch(ch){
+        case 1:enque();
+        break;
+        case 2:deque();
+        break;
+        case 3:display();
+        break;
+        default:printf("enter correct choice\n");
+    }
+}
+}
+void enque(){
+    int x;
+    printf("enter element\n");
+    scanf("%d",&x);
+    if(rear==MAX-1)
+    printf("queue is full\n");
+    else{
+        rear=rear+1;
+        que[rear]=x;
+    }
+}
+void deque(){
+    if(front>rear)
+    printf("que is empty\n");
+    else{
+        printf("deleted element is %d ",que[front]);
+        front++;
+    }
+}
+void display(){
+    int i;
+    if(front>rear)
+    printf("que is empty\n");
+    else{
+        printf("elements in queue are\n");
+        for(i=front;i<=rear;i++){
+            printf("%d\t\n",que[i]);
+        }
+        
+    }
+}
+
+
