@@ -47,5 +47,5 @@ else {
 }
 e++;
 }
-printf("result of infix expression %s is %d",exp,pop());
+printf("result of postfix expression %s is %d",exp,pop());
 }
