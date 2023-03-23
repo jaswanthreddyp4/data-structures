@@ -1,0 +1,71 @@
+#include<stdio.h>
+
+#define MAX 5
+
+int cque[MAX];
+int front =-1;
+int rear=-1;
+
+void encque();
+void delcque();
+void display();
+
+void main(){
+    int ch;
+    while(1){
+        printf("1.enter\n2.delete\n3.display\n");
+        printf("enter choice\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:encque();
+            break;
+            case 2:delcque();
+            break;
+            case 3:display();
+            break;
+            default:printf("incorrect choice\n");
+        }
+    }
+}
+void encque(){
+    int item;
+    printf("enter item\n");
+    scanf("%d",&item);
+    if((rear==MAX-1&&front==0)||front==rear+1)
+    printf("cque if full\n");
+    else{
+        if(rear==MAX-1)
+        rear=0;
+        rear=rear+1;
+        cque[rear]=item;
+    }
+}
+void delcque(){
+    if(rear==-1&&front==0)
+    printf("cque is empty\n");
+    else{
+        if(front==MAX-1)
+        front=0;
+        printf("deleted element is %d ",cque[++front]);
+        front++;
+        
+    }
+}
+void display(){
+    int i;
+       if(rear==-1&&front==0)
+    printf("cque is empty\n");
+    else{
+        printf("circular que elements are\n");
+        if(front<rear)
+        for(i=front;i<=rear;i++)
+        printf("%d\t",cque[i]);
+    
+    else{
+    for(i=front;i<=MAX-1;i++)
+     printf("%d\t",cque[i]);
+     for(int i=MAX-1;i<=rear;i++)
+      printf("%d\t",cque[i]);
+    }
+}
+}
