@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    struct node* left;
+    int data;
+    struct node* right;
+};
+
+struct node* newnode(int item){
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=item;
+    temp->left=NULL;
+    temp->right=NULL;
+    return temp;
+}
+
+void inorder(struct node* root){
+    if(root!=NULL){
+        inorder(root->left);
+        printf("%d->",root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(struct node* root){
+    if(root!=NULL){
+        printf("%d->",root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(struct node* root){
+    if(root!=NULL){
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d->",root->data);
+    }
+}
+
+struct node* insert(struct node* node,int data){
+    if(node==NULL)
+    return newnode(data);
+     if(data<node->data)
+    node->left=insert(node->left,data);
+    else
+    node->right=insert(node->right,data);
+    return node;
+}
+
+struct node* search(struct node* root,int data){
+    if(root==NULL||root->data==data)
+    return root;
+    if(data<root->data)
+    return search(root->left,data);
+    return search(root->right,data);
+}
+
+void main(){
+    struct node* root=NULL;
+    int data;
+    int ch;
+    while(1){
+        printf("1.insert\n2.inorder\n3.preorder\n4.postorder\n5.search\n");
+        printf("enter choice\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:printf("enter data\n");
+            scanf("%d",&data);
+            root=insert(root,data);
+            break;
+            case 2:printf("inorder traversal:");
+            inorder(root);
+            break;
+            case 3:printf("preorder traversal:");
+            preorder(root);
+            break;
+            case 4:printf("postorder traversal:");
+            postorder(root);
+            break;
+            case 5:printf("enter data to be searched\n");
+            scanf("%d",&data);
+            if(search(root,data)!=NULL)
+            printf("found\n");
+            else
+            printf("not found\n");
+            break;
+            default:printf("invalid choice\n");
+        }
+    }
+}
