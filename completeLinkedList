@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node *link;
+};
+struct node* ptr = NULL;
+struct node* newnode = NULL;
+struct node* head = NULL;
+struct node* temp=NULL;
+
+struct node* createnode(){
+    newnode=(struct node*)malloc(sizeof(struct node));
+    int data;
+    printf("enter data\n");
+    scanf("%d",&data);
+    newnode->data=data;
+    newnode->link=NULL;
+    return newnode;
+}
+
+void menu(){
+    printf("1.INSERT AT BEGIN\n");
+    printf("2.INSERT AT END\n");
+    printf("3.DELETE AT BEGIN\n");
+    printf("4.DELETE AT END\n");
+    printf("5.DISPLAY\n");
+}
+
+void insert_begin(){
+    newnode=createnode();
+    newnode->link=head;
+    head=newnode;
+}
+
+void insert_end(){
+    if(head==NULL)
+    printf("overflow\n");
+    else{
+        createnode();
+        ptr=head;
+        while(ptr->link!=NULL){
+        ptr=ptr->link;
+        }
+        ptr->link=newnode;
+    }
+}
+void delete_begin(){
+    ptr=head;
+    head=head->link;
+    free(ptr);
+}
+void delete_end(){
+    if(head==NULL)
+    printf("linked list is empty\n");
+    else{
+        ptr=head;
+        while(ptr->link!=NULL){
+            temp=ptr;
+            ptr=ptr->link;
+        }
+        temp->link=NULL;
+        free(ptr);
+         }
+        }
+    
+void display(){
+    if(head==NULL)
+    printf("linked list is empty\n");
+    else{
+         ptr=head;
+        while(ptr!=NULL){
+            printf("%d\t",ptr->data);
+            ptr=ptr->link;
+        }
+        
+    }
+}
+
+void main(){
+    int ch;
+    while(1){
+        menu();
+        printf("enter choice\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:insert_begin();
+            break;
+            case 2:insert_end();
+            break;
+            case 3:delete_begin();
+            break;
+            case 4:delete_end();
+            break;
+            case 5:display();
+            break;
+            default:printf("invalid choice\n");
+        }
+    }
+}
