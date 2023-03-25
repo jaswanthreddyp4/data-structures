@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    struct node* prev;
+    int data;
+    struct node* next;
+};
+
+struct node* head=NULL;
+struct node* ptr=NULL;
+struct node* tail=NULL;
+struct node* temp=NULL;
+struct node* newNode;
+
+void createnode(){
+    int data;
+     newNode=(struct node*)malloc(sizeof(struct node));
+     printf("enter data\n");
+     scanf("%d",&data);
+     newNode->data=data;
+     newNode->prev=NULL;
+     newNode->next=NULL;
+     }
+     
+void insert_begin(){
+    createnode();
+    if(head==NULL){
+    head=newNode;
+    tail=newNode;
+    }
+    else{
+        newNode->next=head;
+        head->prev=newNode;
+        head=newNode;
+    }
+}
+
+void delete_position(){
+    int position;
+   printf("enter position at which you want to delete node\n");
+   scanf("%d",&position);
+   if(head==NULL)
+   printf("linked list is empty\n");
+   else{
+       ptr=head;
+       int i;
+       for(int i=1;i<position;i++)
+       ptr=ptr->next;
+       tail=ptr->prev;
+       temp=ptr->next;
+       tail->next=temp;
+       temp->prev=tail;
+       free(ptr);
+   }
+   }
+   void display(){
+        if(head == NULL){
+        printf("\nThe linked list is empty");
+    }
+    else{
+        printf("\nThe elemnets of the linked list are: ");
+        ptr = head;
+        while(ptr != NULL){
+            printf("%d ",ptr->data);
+            ptr = ptr->next;
+        }
+    }
+   }
+   void display_reverse(){
+       if(head==NULL)
+       printf("linked list is empty\n");
+       else{
+           ptr=head;
+           while(ptr->next != NULL)
+                 ptr=ptr->next;
+       printf("elements in reverse order are\n");
+            while(ptr->prev != NULL){
+           printf("%d\t",ptr->data);
+           ptr=ptr->prev;
+           }
+           printf("%d\t",ptr->data);
+         
+       }
+         printf("\n");
+     }
+   
+   void main(){
+       int ch;
+       while(1){
+           printf("1.insert at begin\n2.delete at position\n3.display\n4.display reverse\n");
+           printf("enter choice\n");
+           scanf("%d",&ch);
+           switch(ch){
+               case 1:insert_begin();
+               break;
+               case 2:delete_position();
+               break;
+               case 3:display();
+               break;
+               case 4:display_reverse();
+               break;
+               default:printf("enter correct choice\n");
+           }
+       }
+   }
